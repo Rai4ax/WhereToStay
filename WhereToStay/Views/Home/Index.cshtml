@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header class="bg-image">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-lg-12">
+                <h1 class="title-text">Best platfrom to find<br> a place to stay</h1>
+                <div class="d-grid gap-2 d-md-block">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                      <a asp-area="" asp-controller="Home" asp-action="HotelSearch"><button class="btnHero" type="button">Start Now!</button></a>
+                    }
+                    else
+                    {
+                        <a id="login" asp-area="Identity" asp-page="/Account/Login"><button class="btnHero" type="button">Start Now!</button></a>
+
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="overlayHero"></div>
+    </div>
+</header>
+

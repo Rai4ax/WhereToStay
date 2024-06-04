@@ -1,0 +1,273 @@
+﻿@using System.Text.RegularExpressions
+@model WhereToStay.ViewModel.HotelViewModel
+@{ 
+}
+<h1 class="text-center">@Model.Hotel.name</h1>
+<div class="row" style="margin:0% 5% 5% 5%; border:1px solid black; border-radius:2px;">
+            <div class="col-md-6" id="first">
+               <h1>Images</h1>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                @foreach (var item in Model.Images)
+                {
+                    <div class="carousel-item @(item.image_id == Model.Images[0].image_id ? "active" : "")">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.img)" class="d-block w-100" alt="...">
+                    </div>
+                }
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        
+       
+        <form method="post">
+            <div class="form-group">
+                <label for="date" class="col-sm-4 col-form-label">Check-in date</label>
+
+                <div class="input-group date" id="checkin">
+                    <input type="text" class="form-control" >
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-white d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date" class="col-sm-4 col-form-label">Check-out date</label>
+              
+                    <div class="input-group date" id="checkout">
+                        <input type="text" class="form-control" asp-for="checkout">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="people">Number of People:</label>
+                <select class="form-control" id="people">
+                    @foreach (var item in Model.rooms)
+                    {
+
+                        <option data-id="@item.room_id">@item.room_name</option>
+                        
+                    }
+                </select>
+            </div>
+            <button id="checkAvailability" class="btn btn-primary w-100 my-2">Check Availability</button>
+        </form>
+        <form method="post" action="/Home/paymentPage">
+            <input type="hidden" name="roomId" id="roomIdGet" />
+            <input type="hidden" name="checkin" id="checkinGet" />
+            <input type="hidden" name="checkout" id="checkoutGet" />
+            <button id="bookNow" class="btn btn-primary w-100 visually-hidden">Proceed to payment</button>
+        </form>
+        
+            </div> 
+            <div class="col-md-6" id="second">
+             <h1>Location</h1>
+        <div class="ratio ratio-16x9">
+            @if (true)
+            {
+                string address = Regex.Replace(Model.Hotel.address, @"\s+", "+");
+                string embedString = $"https://www.google.com/maps?q={address}{@Model.Hotel.city}&output=embed";
+                <iframe src="@embedString" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            }
+            
+            
+        </div>
+        <div>
+            <h1>Rating: @Model.Hotel.rating <span class="rating"><i class="fas fa-star"></i></span> </h1>
+
+        </div>
+        <div class="hotReview">
+
+            <h1>Description</h1>
+            <p>
+                @Model.Hotel.description
+            </p>
+        </div>
+            </div>
+    <div class="infoTable">
+        <h1>Pricing</h1>
+        <table>
+            <tr>
+                <th>Sleeps</th>
+                <th>Room type</th>
+                <th>Price</th>
+            </tr>
+            @foreach (var item in Model.rooms)
+            {
+                <tr>
+                    <td>
+                         @for (int i = 0; i < item.room_size; i++)
+                        {
+                            <i class="fas fa-user"></i>
+                        }
+                             
+                    </td>
+                    <td>@item.room_name</td>
+                    <td>@item.price</td>
+                </tr>
+            }
+           
+           
+        </table>
+        <h1>Features</h1>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Is Available</th>
+            </tr>
+            <tr>
+                <td><i class="fas fa-parking"></i> Parking</td>
+                <td>
+                    @if (Model.features.has_parking == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-spa"> </i> Spa </td>
+                <td>
+                    @if (Model.features.has_spa == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-wifi"></i> WiFi </td>
+                <td>@if (Model.features.has_wifi == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }</td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-paw"></i> Animal friendly</td>
+                <td>@if (Model.features.has_animals == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }</td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-dumbbell"></i> Gym </td>
+                <td>@if (Model.features.has_gym == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }</td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-cocktail"></i> Bar </td>
+                <td>@if (Model.features.has_bar == true)
+                    {
+                        <i class="fas fa-check"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times"></i>
+                    }</td>
+            </tr>
+            <tr>
+        </table>
+    </div>
+ </div>
+
+@section scripts{
+<script>
+       
+    
+        $(document).ready(function () {
+            $('#checkin').datepicker();
+            $('#checkout').datepicker();
+        });
+        $(document).ready(function () {
+            $("#checkAvailability").click(function (event) {
+                event.preventDefault(); // prevent form submission
+                var selectedOption = $("#people option:selected");
+                var roomId = selectedOption.data("id");
+                checkAvailability(roomId);
+            });
+        });
+       
+
+        function checkAvailability(roomId) {
+            var checkin = $("#checkin input").val();
+            var checkout = $("#checkout input").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/CheckRoomAvailability",
+                data: { roomId: roomId, checkin: checkin, checkout: checkout },
+                success: function (isAvailable) {
+                    if (isAvailable) {
+                        $("#checkAvailability").addClass("btn-success");
+                        $("#checkAvailability").text("Available!");
+                        $("#bookNow").removeClass("visually-hidden");
+                        $("#bookNow").show();
+
+
+                    } else {
+
+                        $("#checkAvailability").addClass("btn-danger");
+                        $("#checkAvailability").text("Not Available");
+                        $("#bookNow").hide();
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            $("#bookNow").click(function (event) {
+                var checkin = $("#checkin input").val();
+                var checkout = $("#checkout input").val();
+                var roomId = $("#people option:selected").data("id");
+
+                $("#roomIdGet").val(roomId);
+                $("#checkinGet").val(checkin);
+                $("#checkoutGet").val(checkout);
+
+                //Submit the form
+                $("form").submit();
+            });
+        });
+        
+                
+        
+</script>
+}

@@ -1,0 +1,183 @@
+﻿@font-face {
+    font-family: 'Lato';
+    src: url('~/css/Lato-Italic.ttf') format('truetype');
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+h1{
+
+    margin-top: 3vh;
+    font-size: 42px;
+    font-weight: bold;
+}
+.navbar {
+    background: linear-gradient(to right, rgb(0, 46, 173, 0.85), rgb(251, 37, 118, 0.8));
+}
+.nav-link {
+    margin-left: 20px;
+    font-size: 1.2em;
+}
+    .nav-link:hover {
+        transition-duration: 0.1s;
+        color: black !important;
+        background-color: rgb(177, 178, 255);
+    }
+    .nav-link:focus {
+        transition-duration: 0.1s;
+        color: black !important;
+        background-color: rgb(177, 178, 255);
+    }
+#logo {
+    color: white !important;
+    margin:auto;
+    font-size: 2em;
+}
+.bg-image {
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://images2.alphacoders.com/677/thumb-1920-677605.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+}
+.btnHero {
+    background-color: #002ead;
+    font-size: 24px;
+    border: none;
+    color:white;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 30px;
+    min-width: 240px;
+    transition-duration: 0.4s;
+}
+
+    .btnHero:hover {
+        color:black;
+        background-color: rgb(210, 218, 255);
+        transition: 0.7s;
+    }
+
+.bg-image::before { /* Overlay color for image*/
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: rgb(5, 5, 30, 0.85);
+    opacity: 65%;
+    z-index: -1;
+}
+
+.title-text {
+    color: #fff;
+    font-size: 56pt;
+    margin-bottom: 20px;
+}
+
+.img-box {
+    position: relative;
+    margin-top: 5vh;
+}
+.overlayHero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    pointer-events:none;
+}
+
+.overlayDestinations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(187, 0, 70, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.text {
+    color: #fff;
+    font-size: 64px;
+    font-weight: bold;
+    transition: all 0.5s;
+
+}
+
+.img-box:hover .text {
+    color: rgba(34, 34, 59, 1);
+    padding-bottom: 2vh;
+    text-decoration: none;
+    text-shadow: 3px 3px 0 rgba(242, 233, 228, 1), -1px -1px 0 rgba(242, 233, 228, 1), 1px -1px 0 rgba(242, 233, 228, 1), -1px 1px 0 rgba(242, 233, 228, 1), 1px 1px 0 rgba(242, 233, 228, 1);
+}
+
+.filter-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#aboutLogo {
+    margin: auto;
+    font-size: 100px;
+    width: 100%;
+    text-align:center;
+    
+}
+
+#aboutHeight{
+   margin-bottom:50px;
+   min-height:440px;
+}
+
+.infoTable table {
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin-bottom: 5%;
+}
+
+.infoTable td, th {
+    border: 2px solid rgba(34, 34, 59, 1);
+    height: 50px;
+}
+
+.infoTable th {
+    background-color: rgba(34, 34, 59, 1);
+    color: white;
+    text-align:center;
+}
+
+.infoTable td {
+    background-color: rgba(242, 233, 228, 1);
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.infoTable h1 {
+    text-align: center;
+    color: rgba(34, 34, 59, 1);
+}

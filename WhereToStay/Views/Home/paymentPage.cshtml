@@ -1,0 +1,64 @@
+﻿@model WhereToStay.ViewModel.PaymentViewModel
+@{
+}
+<section style=" background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp); background-size:cover;">
+<div class="container py-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-9 col-lg-7 col-xl-5">
+            <div class="card">
+
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.images[0].img)"
+                     class="card-img-top" alt="Black Chair" />
+                <div class="card-body">
+                    <div class="card-title d-flex justify-content-between mb-0">
+                        <p class="text-muted mb-0">@Model.roomName</p>
+                        <p class="mb-0">$@Model.roomPrice</p>
+                    </div>
+                </div>
+                <div class="rounded-bottom" style="background-color: #eee;">
+                    <div class="card-body">
+                        <p class="mb-4">Your payment details</p>
+
+                        <div class="form-outline mb-3">
+                            <input type="text" id="formControlLgXM8" class="form-control"
+                                   placeholder="1234 5678 1234 5678" />
+                            <label class="form-label" for="formControlLgXM8">Card Number</label>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <div class="form-outline">
+                                    <input type="password" id="formControlLgExpk8" class="form-control"
+                                           placeholder="MM/YYYY" />
+                                    <label class="form-label" for="formControlLgExpk8">Expire</label>
+                                </div>
+                                    <div class="form-outline my-2">
+                                        <label class="form-label" for="formControlLgExpk8">Date From: @Model.checkin</label>
+                                    </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-outline">
+                                    <input type="password" id="formControlLgcvv8" class="form-control" placeholder="Cvv" />
+                                    <label class="form-label" for="formControlLgcvv8">Cvv</label>
+                                </div>
+                                    <div class="form-outline my-2">
+                                        <label class="form-label" for="formControlLgExpk8">Date To: @Model.checkout</label>
+                                    </div>
+                            </div>
+                        </div>
+
+                            <form asp-action="paymentSuccess" method="post">
+                                <input type="hidden" name="roomId" value="@Model.roomId" />
+                                <input type="hidden" name="checkin" value="@Model.checkin" />
+                                <input type="hidden" name="checkout" value="@Model.checkout" />
+                                <input type="hidden" name="money_spent" value="@Model.roomPrice" />
+                                <button type="submit" class="btn btn-info btn-block">Book the room</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

@@ -1,0 +1,33 @@
+﻿@model WhereToStay.ViewModel.messageViewModel
+@{
+    Layout = "AdminLayout";
+}
+<div class="container-fluid">
+<h1>Messages from customers</h1>
+@foreach (var item in Model.msgList)
+    {
+        
+        <div class="card w-75 my-4" style="background-color: black">
+            <div class="card-body" style="color:white;">
+                <h4 class="card-title my-2">@item.subject</h4>
+                <form>
+                    <div class="form-group">
+                        <H5>Name:</H5>
+                        <p>@item.username</p>
+                    </div>
+                    <div class="form-group">
+                        <H5>Email:</H5>
+                        <p>@item.email</p>
+                    </div>
+
+                    <div class="form-group">
+                        <H5>Message:</H5>
+                        <p>@item.message</p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    }
+
+</div>

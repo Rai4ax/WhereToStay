@@ -1,0 +1,24 @@
+﻿@model WhereToStay.ViewModel.DestinationImages
+@{
+}
+<div class="container">
+    <h1 class="text-center">Destinations</h1>
+    
+        <div class="row">
+        @foreach (var item in Model.destinations)
+        {
+            <div class="col-md-4 my-4">
+                <a asp-area="" asp-controller="Home" asp-action="DestinationHotel" asp-route-id="@item.destinaiton_id">
+                    <div class="img-box">
+                        <img src="https://www.traveller.ee/blog/wp-content/uploads/2016/07/RigaOldTown_Droneview03.jpg" class="img-fluid">
+                        <div class="overlayDestinations">
+                            <div class="text">@item.name</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+        </div>
+   
+    
+</div>

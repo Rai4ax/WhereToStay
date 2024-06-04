@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WhereToStay.Models.Features>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.has_parking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.has_spa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.has_wifi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.has_bar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.has_animals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.has_gym)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_parking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_spa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_wifi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_bar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_animals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.has_gym)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.features_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.features_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.features_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

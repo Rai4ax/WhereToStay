@@ -1,0 +1,50 @@
+﻿@model WhereToStay.ViewModel.SearchHotel;
+@{
+
+
+}
+<div class="container-fluid">
+    <!--  <div class="row">
+        <div class="col-sm-3 bg-light p-3" style=" height: 100vh; overflow-y: scroll;">
+            <h4>Filter By</h4>
+             <div class="filter-box">
+                <form>
+                    foreach (var item in Model.Rooms)
+                    {
+                        <div class="form-group">
+                            <input type="checkbox" id="check1" name="filter1" value="option1">
+                            <label for="check1">item.room_size</label>
+                        </div>
+                    }
+           
+
+
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </form>
+            </div>
+          
+        </div>
+          -->
+        <div class="col-sm-9">
+
+
+            <div class="row my-4">
+                @foreach (var item in Model.Hotel)
+                {
+                    <div class="col-lg-4 mb-3 d-flex align-items-stretch h-50">
+                        <div class="card">
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(@item.Image.img)" class="card-img-top" alt="Hotel 1" style="width: 45wv; height: 45vh; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Hotel.name</h5>
+                                <p class="card-text text-truncate">@item.Hotel.description</p>
+                                <a asp-area="" asp-controller="Home" asp-action="Hotel" asp-route-id="@item.Hotel.hotel_id" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
